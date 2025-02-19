@@ -1,4 +1,6 @@
+// Hanterar karusellens logik
 
+// Funktion för att rendera trailers samt hantera klickhändelser
 export function renderTrailers(movie, num) {
     const iFrameRef = document.createElement(`iframe`);
     iFrameRef.classList.add(`trailers__video`, `trailers__video-${num}`);
@@ -15,6 +17,7 @@ export function renderTrailers(movie, num) {
     })
 }
 
+// Funktion för att byta trailer beroende på vilken pil som klickas på
 function changeTrailer(event, trailerList, trailerArray) {
     if (event.target.dataset.direction === `right`) {
         trailerArray.push(trailerArray.shift());
