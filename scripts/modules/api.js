@@ -1,7 +1,8 @@
-import oData from '../data/data.js';
+// API-anrop
 
 export async function fetchTopMovies() {
-    const response = await fetch('https://santosnr6.github.io/Data/favoritemovies.json');
-    let movies = await response.json();
-    oData.topMovieList = movies;
+    return fetch('https://santosnr6.github.io/Data/favoritemovies.json')
+    .then(response => response.json())
+    .then(data => { return data; }) //Returnerar alla 38 filmer
+    .catch(error => console.log(error.message));
 }
