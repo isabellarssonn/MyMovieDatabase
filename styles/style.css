@@ -103,6 +103,7 @@ body {
     width: 16rem;
     height: auto;
     margin-bottom: 1rem;
+    position: relative;
 }
 
 .movie-card__img {
@@ -121,4 +122,14 @@ body {
     padding-bottom: 1rem;
     border-left: 0.2px solid var(--primary-white);
     padding-top: 0.5rem;
+}
+
+.movie__star-btn {
+    color: var(--text-yellow);
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0.4rem;
+    font-size: 1.5rem;
+    right: 0px;
+    border-bottom-left-radius: 8px;
 }
