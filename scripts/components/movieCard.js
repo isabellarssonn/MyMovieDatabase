@@ -5,7 +5,8 @@ export function movieCard(movie) {
     movieElement.classList.add("movie-card");
 
     movieElement.innerHTML = 
-        `<img src="${movie.Poster}" alt="Bild av filmen ${movie.Title}" class="movie-card__img">
+        `<i class="movie__star-btn fa-regular fa-star"></i>
+        <img src="${movie.Poster}" alt="Bild av filmen ${movie.Title}" class="movie-card__img">
         <h3 class="movie-card__title">${movie.Title}</h3>`
         ;
 
