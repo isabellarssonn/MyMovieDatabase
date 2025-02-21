@@ -11,6 +11,7 @@ function shuffleArray(array) {
     return array.slice(0, 5);
 }
 
+// Hämtar listan med filmer och slumpar med hjälp av shuffleArray
 export async function shuffledTrailers() {
     try {
         let movies = await fetchTopMovies();

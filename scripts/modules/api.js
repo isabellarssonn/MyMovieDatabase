@@ -1,8 +1,12 @@
 // API-anrop
 
 export async function fetchTopMovies() {
-    return fetch('https://santosnr6.github.io/Data/favoritemovies.json')
-    .then(response => response.json())
-    .then(data => { return data; }) //Returnerar alla 38 filmer
-    .catch(error => console.log(error.message));
+    try {
+        let response = await fetch('https://santosnr6.github.io/Data/favoritemovies.json');
+        let data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Misslyckades att hämta filmer:", error);
+        return []; // Returnerar en tom array vid fel
+    }
 }
