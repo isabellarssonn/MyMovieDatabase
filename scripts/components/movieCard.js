@@ -1,8 +1,9 @@
 // Skapa filmkort
 
+// Skapar filmkort i ett HTML element
 export function movieCard(movie) {
-    let movieElement = document.createElement("div");
-    movieElement.classList.add("movie-card");
+    let movieElement = document.createElement('div');
+    movieElement.classList.add('movie-card');
 
     movieElement.innerHTML = 
         `<i class="movie__star-btn fa-regular fa-star"></i>
