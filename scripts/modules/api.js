@@ -10,3 +10,21 @@ export async function fetchTopMovies() {
         return []; // Returnerar en tom array vid fel
     }
 }
+
+
+
+export async function fetchSearch(query) {
+    try {
+        let response = await fetch(`http://www.omdbapi.com/?apikey=36d396b2&s=${query}*`);
+        let data = await response.json();
+        
+        if (data.Search) {
+            return data.Search; // Returnerar en array med filmresultaten
+        } else {
+            return []; // Returnera en tom array om inget hittas
+        }
+    } catch (error) {
+        console.error("Misslyckades att hämta sökresultat:", error);
+        return [];
+    }
+}
