@@ -2,15 +2,17 @@
 
 // Alla imports här uppe
 
-import { fetchTopMovies } from './modules/api.js'
+import { fetchTopMovies, fetchSearch } from './modules/api.js'
 import { shuffledTrailers } from "./utils/utils.js";
 import { renderTrailers } from './modules/carousel.js';
 import { movieCard } from './components/movieCard.js';
+import { handleSearchPage } from './modules/ui.js';
 
 // console.log(await fetchTopMovies());
 
 if(window.location.pathname === '/' || window.location.pathname === '/index.html') {
     console.log('index.html');
+    pageSetup();
 
 } else if(window.location.pathname === '/favorites.html') {
     console.log('favorites.html');
@@ -20,11 +22,10 @@ if(window.location.pathname === '/' || window.location.pathname === '/index.html
 
 } else if(window.location.pathname === '/search.html') {
     console.log('search.html');
-
+    handleSearchPage();
 }
 
 
-pageSetup();
 
 async function pageSetup() {
 
@@ -44,4 +45,18 @@ async function pageSetup() {
     for(let movie of highRankMovies) {
         sectionRef.appendChild(movieCard(movie))
     }
-}
+    
+    // Hanterar sökfunktion, eventlyssnare på searchForm
+    let searchForm = document.getElementById('searchForm');
+    let searchInput = document.getElementById('searchInput');
+
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault()
+            
+            const search = searchInput.value.trim(); // Hämtar användarens sökning
+            if (search) {
+                localStorage.setItem("searchQuery", search); // Sparar sökning i localStorage
+                window.location.href = `search.html?query=${encodeURIComponent(search)}`;
+            }
+        });
+    }
