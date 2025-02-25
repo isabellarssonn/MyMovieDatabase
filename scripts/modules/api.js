@@ -12,7 +12,6 @@ export async function fetchTopMovies() {
 }
 
 
-
 export async function fetchSearch(query) {
     try {
         let response = await fetch(`http://www.omdbapi.com/?apikey=36d396b2&s=${query}*`);
@@ -26,5 +25,16 @@ export async function fetchSearch(query) {
     } catch (error) {
         console.error("Misslyckades att hämta sökresultat:", error);
         return [];
+    }
+}
+
+
+export async function fetchSingleMovie(imdbID) {
+    try {
+        let response = await fetch(`http://www.omdbapi.com/?apikey=36d396b2&plot=full&i=${imdbID}`);
+        let data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Misslyckades att hämta filmdetaljer:", error)
     }
 }
