@@ -21,6 +21,7 @@
 body {
     background-color: var(--primary-bg);
     max-width: 100%;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* Utils */
@@ -89,7 +90,6 @@ body {
     text-align: center;
     margin-bottom: 2rem;
     margin-top: 2rem;
-    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
 }
 
@@ -115,13 +115,13 @@ body {
 
 .movie-card__title {
     color: var(--primary-white);
-    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     font-size: 0.9rem;
     padding-left: 0.6rem;
     padding-bottom: 1rem;
     border-left: 0.2px solid var(--primary-white);
     padding-top: 0.5rem;
+    cursor: pointer;
 }
 
 .movie__star-btn {
@@ -132,4 +132,70 @@ body {
     font-size: 1.5rem;
     right: 0px;
     border-bottom-left-radius: 8px;
+}
+
+/* Single movie card section */
+.singlemovie__container {
+    margin: 0 auto;
+    width: 1100px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.8rem;
+    margin-bottom: 3rem;
+    color: var(--primary-white);
+}
+
+.singlemovie__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.singlemovie__star-btn {
+    color: var(--text-yellow);
+    font-size: 2rem;
+}
+
+.singlemovie__content {
+    display: flex;
+    align-items: stretch;
+}
+
+.singlemovie__img {
+    width: 350px;
+    object-fit: cover;
+}
+
+.singlemovie__info {
+    padding-left: 1rem;
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.single-line {
+    border: none;
+    border-bottom: 1px solid var(--primary-white);
+}
+
+.singlemovie__info--first-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 15px;
+}
+
+.singlemovie__plot-title, .singlemovie__info-title {
+    font-size: 17px;
+    margin-bottom: 0.4rem;
+}
+
+.singlemovie__plot-text, .singlemovie__info-text {
+    font-size: 15px;
+}
+
+.singlemovie__info--third-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
