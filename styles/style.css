@@ -137,7 +137,8 @@ body {
 /* Single movie card section */
 .singlemovie__container {
     margin: 0 auto;
-    width: 1100px;
+    max-width: 1100px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin-top: 1.8rem;
@@ -198,4 +199,34 @@ body {
 .singlemovie__info--third-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+    .singlemovie__content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .singlemovie__img {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .singlemovie__info {
+        padding-left: 0;
+        margin: 1rem;
+    }
+
+    .single-line {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .header__fav-btn {
+        font-size: 1rem;
+    }
+
+    .header__logo {
+        width: 100px;
+    }
 }
