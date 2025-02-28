@@ -2,13 +2,12 @@
 
 // Alla imports här uppe
 
-import { fetchTopMovies, fetchSearch, fetchSingleMovie } from './modules/api.js'
+import { fetchTopMovies } from './modules/api.js'
 import { shuffledTrailers } from "./utils/utils.js";
 import { renderTrailers } from './modules/carousel.js';
-import { movieCard, singleMovieInfo } from './components/movieCard.js';
-import { handleSearchPage } from './modules/ui.js';
+import { movieCard } from './components/movieCard.js';
+import { handleSearchPage, handleSingleMovie, displayFavorites } from './modules/ui.js';
 
-// console.log(await fetchTopMovies());
 
 if(window.location.pathname === '/' || window.location.pathname === '/index.html') {
     console.log('index.html');
@@ -16,6 +15,7 @@ if(window.location.pathname === '/' || window.location.pathname === '/index.html
 
 } else if(window.location.pathname === '/favorites.html') {
     console.log('favorites.html');
+    displayFavorites();
 
 } else if(window.location.pathname === '/movie.html') {
     console.log('movie.html');
@@ -61,15 +61,3 @@ async function pageSetup() {
             }
         });
     }
-
-
-async function handleSingleMovie() {
-    let movieID = localStorage.getItem("selectedMovieID"); // Hämta ID från localStorage
-
-    if (movieID) {
-        let movieData = await fetchSingleMovie(movieID);
-        singleMovieInfo(movieData); // Visa filmens info på sidan
-    } else {
-        console.error("Ingen film vald.");
-    }
-}

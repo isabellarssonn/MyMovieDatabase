@@ -22,4 +22,36 @@ export async function shuffledTrailers() {
     }
 }
 
-// Lägga ihop funktionerna ovan till en??
+export function toggleFavorite(event) {
+    const star = event.target;
+    const movieId = star.dataset.movieId;
+
+    if (!movieId) return;
+
+    // Hämtar favoritlistan från LS, konverterar JSON-sträng till JS array
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    // Kollar om filmen redan finns i favoriter
+    if (favorites.includes(movieId)) {
+        favorites = favorites.filter(id => id !== movieId);
+        star.classList.remove("fa-solid");
+        star.classList.add("fa-regular");
+
+        // Kollar om vi är på favoritsidan
+        let onFavoritesPage = document.getElementById("favoritesTitle"); 
+        // Hittar närmaste filmkort runt den klickade stjärnan, tar sedan bort
+        if (onFavoritesPage) {
+            let movieCard = star.closest(".movie-card");
+            if (movieCard) {
+                movieCard.remove();
+            }
+        }
+    // Lägger till i favoiter om den inte finns
+    } else {
+        favorites.push(movieId);
+        star.classList.remove("fa-regular");
+        star.classList.add("fa-solid");
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+}
