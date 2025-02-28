@@ -1,4 +1,4 @@
-import { fetchSearch, fetchTopMovies, fetchSingleMovie } from "./api.js";
+import { fetchSearch, fetchSingleMovie } from "./api.js";
 import { movieCard, singleMovieInfo } from "../components/movieCard.js";
 import { toggleFavorite } from "../utils/utils.js";
 
@@ -16,6 +16,8 @@ export async function handleSearchPage() {
     }
 }
 
+
+// Hämtar vald films ID och data, visar informationen på sidan
 export async function handleSingleMovie() {
     let movieID = localStorage.getItem("selectedMovieID"); // Hämta ID från localStorage
 
@@ -27,19 +29,33 @@ export async function handleSingleMovie() {
     }
 }
 
+
 // Funktion som visar favoritfilmer
 export async function displayFavorites() {
     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    let cardContainer = document.getElementById("cardContainer");
+    
+    console.log("Favoritfilmer att visa från LS:", favorites);
+
+    let favoriteMovies = [];
+
+    // Hämta alla favoritfilmer individuellt
+    for (let movieId of favorites) {
+        try {
+            let movieData = await fetchSingleMovie(movieId); 
+
+            if (movieData) {
+                favoriteMovies.push(movieData);
+            } else {
+                console.log(`Filmen med ID ${movieId} kunde inte hämtas.`);
+            }
+        } catch (error) {
+            console.error(`Fel vid hämtning av film ${movieId}:`, error);
+        }
+    }
 
     // Rensa innehållet innan nya favoriter läggs till
-    cardContainer.innerHTML = "";
-
-    // Hämta alla filmer först
-    let allMovies = await fetchTopMovies();
-    // Filtrera ut favoritfilmer baserat på sparade movieId:s
-    let favoriteMovies = allMovies.filter(movie => favorites.includes(movie.imdbID));
-    console.log("Favoritfilmer:", favoriteMovies); 
+    let cardContainer = document.getElementById("cardContainer");
+    cardContainer.innerHTML = ""; 
 
     // Använd existerande filmkort och lägg in på sidan
     favoriteMovies.forEach(movie => {
@@ -47,6 +63,7 @@ export async function displayFavorites() {
         cardContainer.appendChild(movieElement);
     });
 }
+
 
 // Hanterar klick på stjärnorna
 document.addEventListener("click", (event) => {
