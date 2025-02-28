@@ -9,8 +9,11 @@ export function movieCard(movie) {
         movie.Poster = '../res/icons/missing-poster.svg';
       }
 
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let isFavorite = favorites.includes(movie.imdbID);
+
     movieElement.innerHTML = 
-        `<i class="movie__star-btn fa-regular fa-star"></i>
+        `<i class="movie__star-btn fa-${isFavorite ? 'solid' : 'regular'} fa-star" data-movie-id="${movie.imdbID}"></i>
         <img src="${movie.Poster}" alt="Bild av filmen ${movie.Title}" class="movie-card__img">
         <h3 class="movie-card__title">${movie.Title}</h3>`
         ;
@@ -26,11 +29,15 @@ export function movieCard(movie) {
 
 export function singleMovieInfo(singleMovie) {
     let movieInfo = document.querySelector('#movieInformation');
+
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let isFavorite = favorites.includes(singleMovie.imdbID);
+
     movieInfo.innerHTML =
         `<article class="singlemovie__container">
         <header class="singlemovie__header">
             <h2 class="singlemovie__title">${singleMovie.Title}</h2>
-            <i class="singlemovie__star-btn fa-regular fa-star"></i>
+            <i class="singlemovie__star-btn fa-${isFavorite ? 'solid' : 'regular'} fa-star" data-movie-id="${singleMovie.imdbID}"></i>
         </header>
         <div class="singlemovie__content">
             <img src="${singleMovie.Poster}" alt="Bild av filmen ${singleMovie.Title}" class="singlemovie__img">
