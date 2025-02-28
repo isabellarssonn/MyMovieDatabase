@@ -1,6 +1,8 @@
 // Shuffle- och hjälpfunktioner
 
 import { fetchTopMovies } from '../modules/api.js'
+import { displayFavorites } from '../modules/ui.js';
+
 
 // Funktion för att blanda en array (Fisher-Yates shuffle)
 function shuffleArray(array) {
@@ -10,6 +12,7 @@ function shuffleArray(array) {
     }
     return array.slice(0, 5);
 }
+
 
 // Hämtar listan med filmer och slumpar med hjälp av shuffleArray
 export async function shuffledTrailers() {
@@ -22,6 +25,8 @@ export async function shuffledTrailers() {
     }
 }
 
+
+// Hanterar favoritmarkring av filmer
 export function toggleFavorite(event) {
     const star = event.target;
     const movieId = star.dataset.movieId;
@@ -46,7 +51,7 @@ export function toggleFavorite(event) {
                 movieCard.remove();
             }
         }
-    // Lägger till i favoiter om den inte finns
+    // Lägger till i favoriter om den inte finns
     } else {
         favorites.push(movieId);
         star.classList.remove("fa-regular");
@@ -54,4 +59,9 @@ export function toggleFavorite(event) {
     }
 
     localStorage.setItem("favorites", JSON.stringify(favorites));
+
+    // Om man är på favoritsidan, uppdatera listan
+    if (document.getElementById("favoritesTitle")) {
+        displayFavorites(); 
+    }
 }

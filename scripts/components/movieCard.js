@@ -27,8 +27,13 @@ export function movieCard(movie) {
 }
 
 
+// Skapar enskilda filmkort
 export function singleMovieInfo(singleMovie) {
     let movieInfo = document.querySelector('#movieInformation');
+
+    if(singleMovie.Poster === 'N/A') {
+        singleMovie.Poster = '../res/icons/missing-poster.svg';
+      }
 
     let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     let isFavorite = favorites.includes(singleMovie.imdbID);
